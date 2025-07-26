@@ -9,6 +9,9 @@ import router from './router'
 import naive from 'naive-ui'
 import { NConfigProvider, NGlobalStyle } from 'naive-ui'
 import { faIR, dateFaIR } from 'naive-ui/es/locales'
+import { h } from 'vue'
+import NaiveUI from 'naive-ui';
+
 
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -21,28 +24,12 @@ import { faIR, dateFaIR } from 'naive-ui/es/locales'
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-const app = createApp({
-    render: () =>
-        h(
-            NConfigProvider,
-            {
-                locale: faIR,
-                dateLocale: dateFaIR,
-                rtl: true,
-                themeOverrides: {
-                    common: {
-                        // fontFamily: 'Vazirmatn, Tahoma, sans-serif'
-                    }
-                }
-            },
-            {
-                default: () => [h(NGlobalStyle), h(App)]
-            }
-        )
-})
+const app = createApp(App);
+
 
 
 app.use(createPinia())
 app.use(router)
-app.use(naive)
+app.use(NaiveUI);
+
 app.mount('#app')
