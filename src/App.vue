@@ -1,40 +1,53 @@
 <script>
-import Slidebar from "@/components/menu/Slidebar.vue";
-import { NConfigProvider, NGlobalStyle, faIR, dateFaIR } from 'naive-ui';
+import Slidebar from './components/menu/Slidebar.vue'
 export default {
   name : "App",
   components: {
-    "slidebar" : Slidebar,
-    NConfigProvider,
-    NGlobalStyle,
+   "slidebar": Slidebar,
   },
-  mounted() {
-    console.log("✅ App mounted");
-  },
-  data() {
+  data(){
     return {
-      faIR,
-      dateFaIR,
-      rtlConfig: [{ name: 'fa', rtl: true }], // تنظیمات RTL برای زبان فارسی
-      themeOverrides: {
-        common: {
-          // fontFamily: 'Vazirmatn, Tahoma, sans-serif'
-        },
-      },
-    };
+      rightDrawerOpen : false,
+
+    }
   },
+  methods:{
+    toggleRightDrawer () {
+      this.rightDrawerOpen = !this.rightDrawerOpen
+    }
+  }
+
+
+
 };
 
 </script>
 
 <template>
-  <n-config-provider :locale="faIR" :date-locale="dateFaIR" :rtl="rtlConfig" :theme-overrides="themeOverrides">
-    <n-global-style />
-    <div>
-     <slidebar></slidebar>
+  <q-layout view="lHr lpR lFf">
+
+    <q-header elevated class="bg-primary text-white">
+      <q-toolbar>
+        <q-btn dense flat round icon="mdi-view-list" @click="toggleRightDrawer" />
+
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          Title
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer show-if-above v-model="rightDrawerOpen" side="left" bordered>
+      <slidebar></slidebar>
+    </q-drawer>
+
+    <q-page-container>
       <router-view />
-    </div>
-  </n-config-provider>
+    </q-page-container>
+
+  </q-layout>
 </template>
 
 

@@ -6,11 +6,17 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
-import naive from 'naive-ui'
-import { NConfigProvider, NGlobalStyle } from 'naive-ui'
-import { faIR, dateFaIR } from 'naive-ui/es/locales'
-import { h } from 'vue'
-import NaiveUI from 'naive-ui';
+import { Quasar } from 'quasar'
+import quasarLang from 'quasar/lang/fa-IR'
+import quasarIconSet from 'quasar/icon-set/mdi-v7'
+// Import icon libraries
+import '@quasar/extras/mdi-v7/mdi-v7.css'
+import 'quasar/dist/quasar.css'
+import '@/assets/css/font.css'
+
+
+// Import Quasar css
+
 
 
 
@@ -30,6 +36,11 @@ const app = createApp(App);
 
 app.use(createPinia())
 app.use(router)
-app.use(NaiveUI);
+app.use(Quasar, {
+    plugins: {}, // import Quasar plugins and add here
+    lang: quasarLang,
+    iconSet: quasarIconSet,
+})
+
 
 app.mount('#app')
