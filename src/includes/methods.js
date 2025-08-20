@@ -84,7 +84,7 @@ export default {
             if (text_count <= count){
                 return text
             }else{
-                return text.substring(0, count)
+                return text.substring(0, count)+ " ..." ;
             }
         },
         Methods_Files_Get_Type(extension){

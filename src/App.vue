@@ -1,8 +1,11 @@
 <script>
 import Slidebar from './components/menu/Slidebar.vue'
+import Template_Title from "@/components/menu/Template_Title.vue";
+
 export default {
   name : "App",
   components: {
+    "template_title":Template_Title,
    "slidebar": Slidebar,
   },
   data(){
@@ -26,15 +29,13 @@ export default {
 <template>
   <q-layout view="lHr lpR lFf">
 
-    <q-header elevated class="bg-primary text-white">
+    <q-header elevated class=" text-dark" style="background-color: #adb883">
       <q-toolbar>
         <q-btn dense flat round icon="mdi-view-list" @click="toggleRightDrawer" />
 
         <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-          Title
+          <strong class="font-20 font-weight-800" >آی&#x200C;ت </strong>
+          <strong class="font-20 font-weight-800 q-ml-xs">کافه</strong>
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
@@ -44,6 +45,7 @@ export default {
     </q-drawer>
 
     <q-page-container>
+<template_title></template_title>
       <router-view />
     </q-page-container>
 

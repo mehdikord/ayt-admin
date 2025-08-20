@@ -15,7 +15,6 @@ export default {
           {{this.$route.meta.subtitle}}
 
         </div>
-        <q-separator class="q-mt-md"></q-separator>
       </q-card-section>
 
   </q-card>

@@ -1,31 +1,29 @@
 import {defineStore} from "pinia";
 import axios from "axios";
-export const Store_Users = defineStore("Users", {
+export const Categories_Products_Store = defineStore("categories_products", {
     actions: {
-//برای گرفتن لیست کاربران
         Index(params){
-            return new Promise((resolve,reject) => {
-                axios.get("/users",{params:params}).then((response)=>{
+            return new Promise((resolve,reject)=>{
+                axios.get('/products/categories',{params:params}).then(response=>{
                     return resolve(response)
                 }).catch(error=>{
-                    return reject(error)
+                    reject(error)
                 })
             })
         },
         Create(params){
             return new Promise((resolve,reject)=>{
-                axios.post('/users/create',params).then((response)=>{
-                    resolve(response)
-                }).catch(error=>{
-                    reject(error)
-                })
+                axios.get('/products/categories/create',params).then((response)=>{
+                    return resolve(response)
+                }).catch((error=>{
+                    return reject(error)
+                }))
             })
-
         },
         All(){
             return new Promise((resolve,reject)=>{
-                axios.get('/users/all').then(response=>{
-                    return resolve(response)
+                axios.get('/products/categories/all').then((response)=>{
+                    return  resolve(response)
                 }).catch(error=>{
                     return reject(error)
                 })
@@ -33,7 +31,7 @@ export const Store_Users = defineStore("Users", {
         },
         Show(id){
             return new Promise((resolve,reject)=>{
-                axios.get('/users/'+id).then(response=>{
+                axios.get('/products/categories/'+id).then((response)=>{
                     return resolve(response)
                 }).catch(error=>{
                     return reject(error)
@@ -42,22 +40,22 @@ export const Store_Users = defineStore("Users", {
         },
         Edit(params){
             return new Promise((resolve,reject)=>{
-                axios.get('/users/'+params.id,params).then(response=>{
+                axios.get('/products/categories/'+params.id,params).then((response)=>{
                     return resolve(response)
                 }).catch(error=>{
                     return reject(error)
                 })
+
             })
         },
         Delete(id){
             return new Promise((resolve,reject)=>{
-                axios.get('/users/'+id).then(response=>{
+                axios.delete(`/products/categories/`+id).then((response)=>{
                     return resolve(response)
                 }).catch(error=>{
                     return reject(error)
                 })
             })
         }
-
     }
 })

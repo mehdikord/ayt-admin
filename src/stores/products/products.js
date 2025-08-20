@@ -1,63 +1,61 @@
 import {defineStore} from "pinia";
 import axios from "axios";
-export const Store_Users = defineStore("Users", {
+export const Products_Store = defineStore("products", {
     actions: {
-//برای گرفتن لیست کاربران
         Index(params){
-            return new Promise((resolve,reject) => {
-                axios.get("/users",{params:params}).then((response)=>{
+            return new Promise((resolve,reject)=>{
+                axios.get('/products',{params:params}).then(response=>{
                     return resolve(response)
                 }).catch(error=>{
-                    return reject(error)
+                    reject(error)
                 })
             })
         },
         Create(params){
             return new Promise((resolve,reject)=>{
-                axios.post('/users/create',params).then((response)=>{
-                    resolve(response)
-                }).catch(error=>{
-                    reject(error)
-                })
+                axios.get('/products/create',params).then((response)=>{
+                    return resolve(response)
+                }).catch((error=>{
+                    return reject(error)
+                }))
             })
-
         },
         All(){
             return new Promise((resolve,reject)=>{
-                axios.get('/users/all').then(response=>{
-                    return resolve(response)
+                axios.get('/products/all').then((response)=>{
+                   return  resolve(response)
                 }).catch(error=>{
-                    return reject(error)
+                   return reject(error)
                 })
             })
         },
         Show(id){
             return new Promise((resolve,reject)=>{
-                axios.get('/users/'+id).then(response=>{
-                    return resolve(response)
+                axios.get('/products/'+id).then((response)=>{
+                   return resolve(response)
                 }).catch(error=>{
-                    return reject(error)
+                  return reject(error)
                 })
             })
         },
         Edit(params){
             return new Promise((resolve,reject)=>{
-                axios.get('/users/'+params.id,params).then(response=>{
+                axios.get('/products/'+params.id,params).then((response)=>{
                     return resolve(response)
                 }).catch(error=>{
                     return reject(error)
                 })
+
             })
         },
         Delete(id){
             return new Promise((resolve,reject)=>{
-                axios.get('/users/'+id).then(response=>{
+                axios.delete(`/products/`+id).then((response)=>{
                     return resolve(response)
                 }).catch(error=>{
                     return reject(error)
                 })
             })
         }
-
     }
 })

@@ -1,39 +1,37 @@
 <script>
 import Global_validation_errors from "@/components/globals/Global_Validation_Errors.vue";
-import {Store_Users} from "@/stores/users/users.js";
 
 export default {
-  name: "Customers_Create",
+  name: "Blog_Categories_Create",
   components: {Global_validation_errors},
   data(){
     return {
-      loading : false,
-      errors : [],
+      loading: false,
+      errors: [],
       items : {
-        name : null,
-        phone : null,
-        description : null
+      name : null,
+      image : null,
+      description : null
       }
     }
   },
-    methods:{
-      Create_Item(){
-        this.loading = true;
-       this.Store_Customers().Create(this.items).then(res=>{
-          this.loading = false;
-          this.Methods_Notify_Create();
-          this.$router.push({name:'customers_index'});
-        }).catch(error=>{
-          if(error.response.status === 422){
-            this.Methods_Validation_Notify()
-            this.errors=error.response.data
-          }
-          this.loading=false;
-        })
-
-      },
+  methods:{
+    Create_Item(){
+      this.loading = true;
+      this.Blog_Store().Create(this.items).then(response=>{
+        this.loading = false;
+        this.Methods_Notify_Create();
+        this.router.push('blog_categories_index')
+      }).catch(error=>{
+        if(error.response.status === 422){
+          this.Methods_Validation_Notify()
+          this.errors=error.response.data
+        }
+        this.loading = false;
+      })
 
     }
+  }
 }
 </script>
 
@@ -42,18 +40,21 @@ export default {
     <q-card-section>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 q-pa-sm">
-          <q-input :error="this.Methods_Validation_Check(errors,'name')" v-model="items.name" dense outlined type="text" label="نام کامل">
+          <q-input :error="this.Methods_Validation_Check(errors,'name')" v-model="items.name" dense outlined type="text" label="نام دسته بندی">
             <template v-slot:error>
               <global_validation_errors :errors="this.Methods_Validation_Errors(errors,'name')" />
             </template>
           </q-input>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 q-pa-sm">
-          <q-input :error="this.Methods_Validation_Check(errors,'phone')" v-model="items.phone" dense outlined type="number" label="شماره تماس">
-            <template v-slot:error>
-              <global_validation_errors :error="this.Methods_Validation_Errors(errors,'phone')" />
-            </template>
-          </q-input>
+          <q-file
+              v-model="items.image"
+              label="انتخاب فایل"
+              multiple
+              use-chips
+              dense
+              outlined
+          />
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 q-pa-sm">
           <q-input :error="this.Methods_Validation_Check(errors,'description')" outlined v-model="items.description"  type="textarea" rows="4" label="توضیحات">
@@ -69,6 +70,7 @@ export default {
 
     </q-card-section>
   </q-card>
+
 
 </template>
 
